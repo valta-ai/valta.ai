@@ -1,0 +1,14 @@
+{
+  // Deploy from this folder while logged in to the account that holds the valta.ai zone:
+  //   npx wrangler deploy
+  // DNS in that zone: valta.ai and www as proxied AAAA 100:: (remove the old A records
+  // that point at Cloudflare IPs; they cause the "DNS points to prohibited IP" 403).
+  "name": "valta-ai-domain-proxy",
+  "main": "worker.js",
+  "compatibility_date": "2026-11-01",
+  "workers_dev": false,
+  "routes": [
+    { "pattern": "valta.ai/*", "zone_name": "valta.ai" },
+    { "pattern": "www.valta.ai/*", "zone_name": "valta.ai" }
+  ]
+}
