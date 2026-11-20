@@ -1,0 +1,13 @@
+# Old valta.ai (Next.js) paths -> the new 2-page site
+/get-started        /#start            301
+/services           /#services         301
+/services/*         /#services         301
+/use-cases          /#who              301
+/directory          /preferred-vendors 301
+/directory/*        /preferred-vendors 301
+/about              /                  301
+/blog               /                  301
+/blog/*             /                  301
+/privacy            /                  302
+/terms              /                  302
+/index.html         /                  301

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://valta.ai/sitemap.xml
