@@ -11,9 +11,10 @@
     if (!form.reportValidity()) return;
     var fd = new FormData(form);
     var v = function (k) { return String(fd.get(k) || '').trim(); };
-    var notes = 'Company: ' + v('company') + '\nTrade: ' + v('trade') + (v('message') ? '\n\n' + v('message') : '');
+    var notes = '[valta.ai Get onboarded]\nCompany: ' + v('company') + '\nIndustry: ' + v('industry') +
+      '\nTrade: ' + v('trade') + '\nPlan: ' + v('plan') + (v('message') ? '\n\n' + v('message') : '');
 
-    (window.dataLayer = window.dataLayer || []).push({ event: 'generate_lead', form_name: 'get_onboarded', trade: v('trade') });
+    (window.dataLayer = window.dataLayer || []).push({ event: 'generate_lead', form_name: 'get_onboarded', industry: v('industry'), plan: v('plan') });
 
     if (BREVO_FORM_URL.indexOf('PASTE_') === 0) {
       var body = 'Name: ' + v('firstName') + ' ' + v('lastName') + '\nEmail: ' + v('email') + '\nPhone: ' + v('phone') + '\n' + notes;
