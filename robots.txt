@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://valta.ai/sitemap.xml
+Sitemap: https://www.valta.ai/sitemap.xml
