@@ -1,9 +1,8 @@
 // valta.ai "Get onboarded" form -> Brevo hosted form (same pattern as valtagc.com).
 // Brevo's API key can't run on Cloudflare (IP authorisation), so the browser posts
 // straight to the Brevo hosted form. Field names must match that Brevo form.
-// Until BREVO_FORM_URL is set, the form falls back to an email to contact@valta.ai.
 (function () {
-  var BREVO_FORM_URL = 'PASTE_BREVO_FORM_URL';
+  var BREVO_FORM_URL = 'https://54461d99.sibforms.com/serve/MUIFAN7TFrrJ51d6jDvwgv3BPR7IFVtIo7k0_KLjz_maOnsXv7lCMa8y-CL-oxNAp365Qdk6NWRlsHkGVb9QPVp-AvEQy2alcB6wy7jYPxIi8o_yHLCEIUiPXkDjsv2wkidac-OVGIg9SlBbmz6gSX3nSO-ltAZsMBXTsI2X_bTSP9yQ9gyrHf6pbiemdQRLMFzC7xdrAFv12VMt'; // Brevo form "contact valta ai" -> list "Valta AI"
   var form = document.getElementById('valta-lead-form');
   if (!form) return;
 
