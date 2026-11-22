@@ -54,9 +54,33 @@ valta.ai and www.valta.ai showed **Cloudflare Error 1000** ("DNS points to prohi
 ### 4. contact@valta.ai account (not the valta.ai zone)
 - Pages project `valta-ai` → Custom domains → www.valta.ai: clicked "Check DNS records" so Pages verified the domain. (The custom domain itself was added 11/20.)
 
-## Not touched
+## Change 2 — 2026-11-21 ~20:20 PT: app.valta.ai → 47.90.254.33
+**Requested by:** a Valta.AI Products team member (WeChat 11/21 20:08): "@Howard Huang Please point the DNS for https://app.valta.ai to 47.90.254.33". Alex earlier: "@Howard Huang could do it...". **Approved by Howard** in chat the same evening. Done by Claude as contact@valta.ai.
+
+Saved before the change: full list of all 12 zone records with comments, TTL and proxy → `dns-snapshots/2026-11-21-before-app-change.txt`.
+
+Checked before the change:
+- 47.90.254.33 answers for app.valta.ai (http → 301 https; https 200), but its SSL certificate is **expired**.
+- Zone SSL mode is **Full** (Cloudflare accepts the origin certificate without validating it). So the record stays **Proxied**: visitors get Cloudflare's valid certificate. DNS only would show visitors a certificate error.
+
+| | Name | Type | Content | Proxy | TTL | Comment |
+|---|---|---|---|---|---|---|
+| **Edited** (was 104.21.73.178, no comment) | app | A | 47.90.254.33 | Proxied | Auto | "Edited by Howard Nov 21 2026 (via Claude): app to 47.90.254.33 per team request in WeChat" |
+| Deleted (no comment, no tags) | app | A | 172.67.147.92 | Proxied | Auto | – |
+
+Why the delete: two A records means round-robin; the old Cloudflare IP would keep giving half of visitors Error 1000, and Cloudflare does not allow two identical A records.
+
+Not touched: everything else (10 records unchanged, SSL mode unchanged, email records unchanged).
+
+Verified (curl, 2026-11-21): https://app.valta.ai → 200; http://app.valta.ai → 301 https; www.valta.ai 200; valta.ai → 301 www; MX smtp.google.com unchanged. Zone now has 11 records.
+
+**Undo:** edit A app → 104.21.73.178 (remove the comment) and add A app 172.67.147.92, Proxied, Auto. (Old values gave Error 1000.)
+
+**For the app team (not a DNS issue):** the certificate on 47.90.254.33 has expired. It works only because Cloudflare is in Full mode. Renew it (or install a Cloudflare Origin Certificate) before anyone switches the zone to Full (Strict).
+
+## Not touched (Change 1)
 - All email records listed in Jing's rule 3.
-- **app.valta.ai** (A/AAAA still on the old IPs; returns 403). Left as is: not part of the request. Ask Jing before any change.
+- app.valta.ai in Change 1 (changed later in Change 2 at the team's request).
 - valtagc.com and every other zone.
 - No account, member, SSL or security settings.
 

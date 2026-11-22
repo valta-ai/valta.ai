@@ -1,0 +1,16 @@
+valta.ai zone, all 12 DNS records, read from the Cloudflare dashboard 2026-11-21 ~20:15 PT
+BEFORE the app.valta.ai change (requested in WeChat 11/21 20:08: "Please point the DNS for https://app.valta.ai to 47.90.254.33").
+Format: name | type | content | proxy | TTL | tags | comment | priority
+
+app.valta.ai | A | 104.21.73.178 | Proxied | Auto | - | - | -
+app.valta.ai | A | 172.67.147.92 | Proxied | Auto | - | - | -
+valta.ai | A | 192.0.2.1 | Proxied | Auto | - | Edited by Claude for Howard Nov 21 2026: placeholder for redirect to www; old IPs gave Error 1000 | -
+www.valta.ai | CNAME | valta-ai.pages.dev | Proxied | Auto | - | Added by Claude for Howard Nov 21 2026: www to Pages site; replaced old A/AAAA (Error 1000) | -
+send.valta.ai | MX | feedback-smtp.us-east-1.amazonses.com | DNS only | Auto | - | - | 10
+valta.ai | MX | smtp.google.com | DNS only | Auto | - | - | 1
+_dnsauth.valta.ai | TXT | "2025122800000043lsqjzgc1frofaifooqvzhdrmaje6ae1t2jm86rvpnux9u908" | DNS only | Auto | - | - | -
+google._domainkey.valta.ai | TXT | DKIM (google), v=DKIM1 key | DNS only | Auto | - | Added by Jing Nov 21 2026, for google | -
+resend._domainkey.valta.ai | TXT | DKIM (resend) p=MIGfMA0... | DNS only | Auto | - | - | -
+valta.ai | TXT | "v=spf1 include:_spf.google.com include:amazonses.com ~all" | DNS only | Auto | - | Edited by Jing Nov 21 2026, added google besides the existing amazon to send email | -
+valta.ai | TXT | "google-site-verification=MzQ9sxz5-h3jNVLx8P5eTGmko3ZcrQts2ncg983Poi8" | DNS only | Auto | - | - | -
+valta.ai | TXT | "google-site-verification=FLMz1_fc5lYNfmF_8gqqRi3IUu5HpHrXJp0IXwdVDVE" | DNS only | Auto | - | - | -
