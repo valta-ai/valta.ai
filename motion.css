@@ -1,0 +1,57 @@
+/* Valta.ai motion layer (added 2026-11-21 for Alex's request: hover, animation, hero background).
+   Undo: remove the <link href="/motion.css"> and <script src="/motion.js"> lines from the pages.
+   Classes are only added by motion.js, so without JS the pages look exactly as before. */
+
+/* Hero background: blueprint grid that drifts slowly + two soft green glows */
+.vm-hero { position: relative; overflow: hidden; isolation: isolate; }
+.vm-hero > :not(.vm-hero-bg) { position: relative; z-index: 1; }
+.vm-hero-bg { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+.vm-hero-bg::before {
+  content: ""; position: absolute; inset: -240px 0 0 -240px;
+  background: url("/hero-bg.svg") repeat;
+  animation: vm-drift 60s linear infinite;
+  -webkit-mask-image: radial-gradient(ellipse 80% 90% at 60% 40%, #000 30%, transparent 85%);
+          mask-image: radial-gradient(ellipse 80% 90% at 60% 40%, #000 30%, transparent 85%);
+}
+.vm-hero-bg::after {
+  content: ""; position: absolute; inset: 0;
+  background:
+    radial-gradient(520px 380px at 78% 30%, rgba(61, 220, 151, .16), transparent 70%),
+    radial-gradient(420px 320px at 10% 90%, rgba(61, 220, 151, .08), transparent 70%);
+  animation: vm-glow 9s ease-in-out infinite alternate;
+}
+@keyframes vm-drift { to { transform: translate(240px, 240px); } }
+@keyframes vm-glow { from { opacity: .7; transform: scale(1); } to { opacity: 1; transform: scale(1.06); } }
+
+/* Hero entrance: text, buttons and cards rise in one after another */
+.vm-in { opacity: 0; transform: translateY(18px); animation: vm-rise .7s cubic-bezier(.2, .7, .2, 1) forwards; animation-delay: var(--vm-d, 0s); }
+@keyframes vm-rise { to { opacity: 1; transform: none; } }
+
+/* Task pills pop in */
+.vm-pill { opacity: 0; transform: scale(.85); animation: vm-pop .45s cubic-bezier(.3, 1.4, .5, 1) forwards; animation-delay: var(--vm-d, 0s); transition: transform .2s ease, background-color .2s ease; }
+@keyframes vm-pop { to { opacity: 1; transform: none; } }
+.vm-pill:hover { transform: translateY(-2px); }
+
+/* "Valta connects the two" arrow pulses */
+.vm-flow { animation: vm-nudge 1.8s ease-in-out infinite; }
+@keyframes vm-nudge { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(4px); } }
+
+/* Scroll reveal for the sections below the hero */
+.vm-reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s cubic-bezier(.2, .7, .2, 1); transition-delay: var(--vm-d, 0s); }
+.vm-reveal.vm-show { opacity: 1; transform: none; }
+
+/* Hover: cards lift, buttons lift and glow, nav links underline */
+.vm-card { transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
+.vm-card:hover { transform: translateY(-4px); box-shadow: 0 14px 30px rgba(14, 23, 38, .14); }
+.vm-btn { transition: transform .2s ease, box-shadow .2s ease, filter .2s ease; }
+.vm-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(61, 220, 151, .28); filter: brightness(1.05); }
+.vm-btn:active { transform: translateY(0); }
+.vm-nav { background-image: linear-gradient(currentColor, currentColor); background-size: 0 2px; background-repeat: no-repeat; background-position: 0 100%; transition: background-size .25s ease; }
+.vm-nav:hover { background-size: 100% 2px; }
+
+/* Respect people who turn motion off */
+@media (prefers-reduced-motion: reduce) {
+  .vm-hero-bg::before, .vm-hero-bg::after, .vm-flow { animation: none; }
+  .vm-in, .vm-pill, .vm-reveal { opacity: 1; transform: none; animation: none; transition: none; }
+  .vm-card:hover, .vm-btn:hover, .vm-pill:hover { transform: none; }
+}

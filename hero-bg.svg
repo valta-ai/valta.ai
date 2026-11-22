@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="240" viewBox="0 0 240 240">
+  <!-- Valta.ai hero background tile: faint blueprint grid with node dots and connector lines (tiles seamlessly). -->
+  <g fill="none" stroke="#3ddc97" stroke-opacity=".07" stroke-width="1">
+    <path d="M0 .5H240M0 60.5H240M0 120.5H240M0 180.5H240M.5 0V240M60.5 0V240M120.5 0V240M180.5 0V240"/>
+  </g>
+  <g fill="none" stroke="#3ddc97" stroke-opacity=".16" stroke-width="1.5" stroke-linecap="round">
+    <path d="M60 60H120V120M180 120V180H120"/>
+  </g>
+  <g fill="#3ddc97" fill-opacity=".35">
+    <circle cx="60" cy="60" r="2.5"/>
+    <circle cx="120" cy="120" r="2.5"/>
+    <circle cx="180" cy="180" r="2.5"/>
+    <circle cx="180" cy="120" r="2"/>
+  </g>
+</svg>
