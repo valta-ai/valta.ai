@@ -10,6 +10,16 @@ Anyone on the team can undo a change from this file alone; nobody needs to ask H
 
 ---
 
+## 2026-11-22 — Preview address valta-ai.pages.dev now forwards to www.valta.ai
+- **Why:** Google Analytics (property "Valta.ai") counted visits from the preview address `valta-ai.pages.dev` (16 on 11/20, 6 on 11/22) mixed in with the real site. Two addresses with the same pages also split search results.
+- **Asked and approved by:** Howard Huang, 11/22 ("sure, go ahead and do that").
+- **Change made by:** Howard Huang (via Claude, his AI assistant).
+- **Why not a Tag Manager filter:** the available tools cannot edit an existing GTM tag (only delete and recreate), and the live GA4 tag was not put at risk. The GTM container GTM-PLZ36C9Q was **not changed**.
+- **What changed:** new file `functions/_middleware.js` (Cloudflare Pages Function). Requests whose host is exactly `valta-ai.pages.dev` get a 301 to `https://www.valta.ai` + same path and query. www.valta.ai, valta.ai, the old-path redirects in `_redirects`, the form and tracking are unchanged. Per-deployment preview links (`<hash>.valta-ai.pages.dev`) still work for reviewing changes.
+- **Tested:** unit test of the function (pages.dev → 301 with path and query kept; www, valta.ai and hash previews served normally); live check after deploy.
+- **Rollback tag:** `pre-pagesdev-redirect-2026-11-22` (site exactly as before this change).
+- **Undo options:** (1) Cloudflare Pages rollback to the deployment before this one; (2) delete `functions/_middleware.js` and push; (3) reset main to tag `pre-pagesdev-redirect-2026-11-22` and push.
+
 ## 2026-11-22 — Hero background replaced (faster circuit pulses)
 - **Asked by:** Alex (WeChat, Valta.AI Products, 11/22 00:11): "the effects looks good on the site in general. my only recommendation is to modify the background animation for the top part … it moves too slowly and not very attractive".
 - **Approved by:** Howard Huang, 11/22, after reviewing local preview videos ("I think we're fine. Let's go ahead and deploy.").
