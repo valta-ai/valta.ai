@@ -10,6 +10,14 @@ Anyone on the team can undo a change from this file alone; nobody needs to ask H
 
 ---
 
+## 2026-11-22 — Version number on the animation file links (so browsers load the new hero)
+- **Why:** browsers keep `motion.js`/`motion.css` for up to 4 hours (`cache-control: max-age=14400`), so people who visited before the hero change still saw the old slow grid.
+- **Asked and approved by:** Howard Huang, 11/22 ("you haven't deployed the new animations yet?").
+- **Change made by:** Howard Huang (via Claude, his AI assistant).
+- **What changed:** in `index.html` and `preferred-vendors.html`, `/motion.css` → `/motion.css?v=2` and `/motion.js` → `/motion.js?v=2`. Nothing else. Next time the motion files change, raise the number (v=3, …).
+- **Rollback tag:** `pre-motion-cachebust-2026-11-22`.
+- **Undo options:** (1) Cloudflare Pages rollback to the deployment before this one; (2) remove `?v=2` from the two lines in both pages and push; (3) reset main to the tag and push.
+
 ## 2026-11-22 — Preview address valta-ai.pages.dev now forwards to www.valta.ai
 - **Why:** Google Analytics (property "Valta.ai") counted visits from the preview address `valta-ai.pages.dev` (16 on 11/20, 6 on 11/22) mixed in with the real site. Two addresses with the same pages also split search results.
 - **Asked and approved by:** Howard Huang, 11/22 ("sure, go ahead and do that").
