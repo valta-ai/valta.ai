@@ -10,6 +10,19 @@ Anyone on the team can undo a change from this file alone; nobody needs to ask H
 
 ---
 
+## 2026-11-22 — Hero background replaced (faster circuit pulses)
+- **Asked by:** Alex (WeChat, Valta.AI Products, 11/22 00:11): "the effects looks good on the site in general. my only recommendation is to modify the background animation for the top part … it moves too slowly and not very attractive".
+- **Approved by:** Howard Huang, 11/22, after reviewing local preview videos ("I think we're fine. Let's go ahead and deploy.").
+- **Change made by:** Howard Huang (via Claude, his AI assistant). Built and tested locally first on branch `hero-pulse-2026-11-22`.
+- **What changed (top section background only):**
+  - `motion.js`: new function `pulses()` draws faint circuit lines on a canvas; green pulses run along them (a new one every 0.2–0.5 s) and flash the hub they reach. It stops when the section is off screen or the tab is hidden; visitors with "reduce motion" see still lines only.
+  - `motion.css`: removed the 60-second drifting grid and the timed glow; added the canvas styles (lines fade under the headline) and a glow that follows the pointer.
+  - Deleted `hero-bg.svg` (only the old grid used it).
+  - No HTML, text, links, form or tracking changed. Hover, entrance and scroll effects from 11/21 are unchanged.
+- **Tested:** headless Chromium + WebKit, desktop 1440px and phone 390px, analytics blocked: canvas present, no script errors.
+- **Rollback tag:** `pre-hero-pulse-2026-11-22` (site exactly as before this change, = commit f258e4d).
+- **Undo options:** (1) Cloudflare Pages rollback to the deployment before this one; (2) `git revert` the hero-pulse commits and push; (3) reset main to tag `pre-hero-pulse-2026-11-22` and push.
+
 ## 2026-11-21 — Motion layer (animations, hover, hero background)
 - **Asked by:** Alex (WeChat, Valta.AI Products, 11/21): "add a little bit dynamics, animation effects… hover… a background image on the top… with some animations".
 - **Approved by:** Howard Huang, 11/21 ("Animations look fine. Let's go ahead and deploy it").
